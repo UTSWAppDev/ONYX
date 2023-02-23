@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hashtag Finder and Text Sanitizer</title>
+	<script>
+		function sanitizeAndFindHashtags() {
+			var input = document.getElementById("input").value;
+			var hashtags = findHashtags(input);
+			var sanitizedInput = sanitizeText(input);
+			document.getElementById("sanitizedText").innerHTML = sanitizedInput;
+			document.getElementById("hashtags").innerHTML = "Hashtags found: " + hashtags.join(", ");
+			analyzeText(sanitizedInput);
+		}
+
+		function sanitizeText(input) {
+			var sanitized = input.replace(/[^a-z0-9\s\.,;:'"!\?]+/gi, "");
+			return sanitized;
+		}
+
+		function findHashtags(input) {
+			var hashtags = input.match(/#.*?\n/g);
+			if (hashtags) {
+				return hashtags;
+			} else {
+				return [];
+			}
+		}
+	
+		function analyzeText(txtInput) {
+			console.log(txtInput); // check if input text is being passed properly
+			fetch("https://api.us-south.natural-language-understanding.watson.cloud.ibm.com/instances/0faaddc7-ba71-495b-b52a-d1338d5e887d/v1/analyze?version=2019-07-12", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					"Authorization": "Basic " + btoa("apikey:ew_gwxAcTQ0gbFTPi4uKM19OUgyP6Wu3XOxfsS9ESM_P")
+				},
+				body: JSON.stringify({
+					text: txtInput,
+					features: {
+						sentiment: {},
+						categories: {},
+						concepts: {},
+						entities: {},
+						keywords: {}
+					}
+				})
+			})
+				.then((response) => response.json())
+				.then((data) => {
+					console.log(data);
+				})
+				.catch(error => {
+					console.error(error);
+				});
+		}
+	</script>
+</head>
+
+<body>
+	<h1>Hashtag Finder and Text Sanitizer</h1>
+	<form>
+		<label for="input">Enter text to analyze:</label><br>
+		<textarea id="input" name="input" rows="40" cols="200"></textarea><br>
+		<button type="button" onclick="sanitizeAndFindHashtags()">Sanitize and Analyze Text</button>
+	</form>
+	<div>
+		<p><strong>Sanitized Text:</strong></p>
+		<p id="sanitizedText"></p>
+		<p id="hashtags"></p>
+	</div>
+</body>
+</html>
