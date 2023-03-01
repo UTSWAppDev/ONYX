@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hashtag Finder and Text Analyzer</title>
+	<script>
+		function sanitizeAndFindHashtags() {
+			var input = document.getElementById("input").value;
+			var hashtags = findHashtags(input);
+			document.getElementById("hashtags").innerHTML = "Hashtags found: <br>" + hashtags.join("<br>");
+			analyzeText(input);
+		}
+
+		function findHashtags(input) {
+			var hashtags = input.match(/#.*?\n/g);
+			if (hashtags) {
+				return hashtags;
+			} else {
+				return [];
+			}
+		}
+	
+		function analyzeText(txtInput) {
+			fetch("https://api.us-south.natural-language-understanding.watson.cloud.ibm.com/instances/0faaddc7-ba71-495b-b52a-d1338d5e887d/v1/analyze?version=2019-07-12", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					"Authorization": "Basic " + btoa("apikey:ew_gwxAcTQ0gbFTPi4uKM19OUgyP6Wu3XOxfsS9ESM_P")
+				},
+				body: JSON.stringify({
+					text: txtInput,
+					features: {
+						concepts: {},
+						entities: {},
+						keywords: {}
+					}
+				})
+			})
+				.then((response) => response.json())
+				.then((data) => {
+					console.log(data);
+					var NLU_output = document.getElementById("NLUoutput");
+					NLU_output.innerHTML = JSON.stringify(data);
+
+				var concepts = data["concepts"]; 
+				console.log(concepts); 
+
+				})
+				.catch(error => {
+					console.error(error);
+				});
+		}
+
+	</script>
+</head>
+
+<body>
+	<h1>Hashtag Finder and Text Analyzer</h1>
+	<form>
+		<label for="input">Enter text to analyze:</label><br>
+		<textarea id="input" name="input" rows="40" cols="200"></textarea><br>
+		<button type="button" onclick="sanitizeAndFindHashtags()">Find Hashtags and Analyze Text</button>
+	</form>
+	<div>
+		<p><strong>Hashtags and Analyzed Text:</strong></p>
+		<p id="hashtags"></p>
+		<p id="NLUoutput"></p>
+	</div>
+</body>
+</html>
