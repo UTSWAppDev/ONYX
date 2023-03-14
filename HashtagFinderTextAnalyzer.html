@@ -3,7 +3,7 @@
 <head>
 	<title>Hashtag Finder and Text Analyzer</title>
 	<script>
-		function sanitizeAndFindHashtags() {
+		function analyzeAndFindHashtags() {
 			var input = document.getElementById("input").value;
 			var hashtags = findHashtags(input);
 			document.getElementById("hashtags").innerHTML = "Hashtags found: <br>" + hashtags.join("<br>");
@@ -40,10 +40,28 @@
 					console.log(data);
 					var NLU_output = document.getElementById("NLUoutput");
 					NLU_output.innerHTML = JSON.stringify(data);
+					
+				var concepts = [];
+				var entities = []; 
+				var keywords = []; 
+				
+				for (let i = 0; i < data.concepts.length; i++) { 
+					concepts.push(data.concepts[i].text);
+				}
+				
+				for (let j = 0; j < data.entities.length; j++) {
+					if (data.entities[j].type == 'HealthCondition') {
+						entities.push(data.entities[j].text);
+					}
+				}
 
-				var concepts = data["concepts"]; 
-				console.log(concepts); 
-				console.log(concepts[0][0]); 
+				for (let k = 0; k < data.keywords.length; k++) {
+					keywords.push(data.keywords[k].text);
+				}
+
+				console.log(concepts);
+				console.log(entities);
+				console.log(keywords);
 
 				})
 				.catch(error => {
@@ -59,12 +77,16 @@
 	<form>
 		<label for="input">Enter text to analyze:</label><br>
 		<textarea id="input" name="input" rows="40" cols="200"></textarea><br>
-		<button type="button" onclick="sanitizeAndFindHashtags()">Find Hashtags and Analyze Text</button>
+		<button type="button" onclick="analyzeAndFindHashtags()">Find Hashtags and Analyze Text</button>
 	</form>
 	<div>
 		<p><strong>Hashtags and Analyzed Text:</strong></p>
 		<p id="hashtags"></p>
 		<p id="NLUoutput"></p>
+		<br><strong>NLU Identified Concepts:</strong></br>
+		<p id="concepts"></p>
+		<p id="entities"></p>
+		<p id="keywords"></p>
 	</div>
 </body>
 </html>
