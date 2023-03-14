@@ -11,12 +11,9 @@
 		}
 
 		function findHashtags(input) {
-			var hashtags = input.match(/#.*?\n/g);
-			if (hashtags) {
-				return hashtags;
-			} else {
-				return [];
-			}
+			const hashtags = input.match(/#.*?\n/g) || [];
+			console.log(hashtags); 
+			return hashtags;
 		}
 	
 		function analyzeText(txtInput) {
