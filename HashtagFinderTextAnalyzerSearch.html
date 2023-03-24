@@ -3,16 +3,25 @@
 <head>
 	<title>Hashtag Finder and Text Analyzer</title>
 	<script>
+		const concepts = [];
+		const entities = []; 
+		const keywords = []; 
+		const searchResults = [];  
+
 		function analyzeAndFindHashtags() {
 			var input = document.getElementById("input").value;
 			var hashtags = findHashtags(input);
 			document.getElementById("hashtags").innerHTML = "Hashtags found: <br>" + hashtags.join("<br>");
 			analyzeText(input);
+	
+            searchGoogle(concepts);
+			searchGoogle(entities); 
+			searchGoogle(keywords);
 		}
 
 		function findHashtags(input) {
 			const hashtags = input.match(/#.*?\n/g) || [];
-			console.log(hashtags); 
+//			console.log(hashtags); 
 			return hashtags;
 		}
 	
@@ -38,10 +47,6 @@
 					var NLU_output = document.getElementById("NLUoutput");
 					NLU_output.innerHTML = JSON.stringify(data);
 					
-				const concepts = [];
-				const entities = []; 
-				const keywords = []; 
-				
 				for (let i = 0; i < data.concepts.length; i++) { 
 					concepts.push(data.concepts[i].text);
 				}
@@ -66,13 +71,13 @@
 				});
 		}
 
-		function searchGoogle(entities) {
-			// Empty array to store search results
-			let searchResults = [];  
-			
+		function searchGoogle(query) {
+			console.log(query[0]);
+			console.log(query.length);
 			// Loop through each text content and perform the search
-			for (let l = 0; l < entities.length; l++) {
-				const searchQuery = "patient education material " + entities[l].text;
+			for (let m = 0; m < query.length; m++) {
+				console.log(m);
+				const searchQuery = "patient education material " + query[m];
 				const searchUrl = "https://www.google.com/search?q=" + encodeURIComponent (searchQuery); 
 				searchResults.push(searchUrl); 
 			}
@@ -90,7 +95,6 @@
 		<label for="input">Enter text to analyze:</label><br>
 		<textarea id="input" name="input" rows="40" cols="200"></textarea><br>
 		<button type="button" onclick="analyzeAndFindHashtags()">Find Hashtags and Analyze Text</button>
-		<button type="button" onclick="searchGoogle()">Find Patient Education Material</button>
 	</form>
 	<div>
 		<p><strong>Hashtags and Analyzed Text:</strong></p>
