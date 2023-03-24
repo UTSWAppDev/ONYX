@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Hospital Buddy Bot</title>
+	<link rel="stylesheet" href="static/css/chat.css">
+	<link rel="stylesheet" href="static/css/home.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap">
+	<link
+	rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
+	integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc"
+	crossorigin="anonymous"
+  />
+</head>
+
+
+<body>
+
+	<!--Navigator bar-->
+<nav class="navbar">
+	<div class="navbar__container">
+		<a href="HospitalBuddy_index.html" id="navbar__logo"><i class="fas fa-gem"></i>ONYX</a>	
+		<div class="navbar__toggle" id="mobile-menu">
+			<span class="bar"></span>
+			<span class="bar"></span>
+			<span class="bar"></span>
+		</div>
+		<ul class="navbar__menu">
+			<li class="navbar__item">
+				<a href="HospitalBuddy_index.html" class="navbar__links">Home</a>
+			</li>
+			<li class="navbar__item">
+				<a href="contacts.html" class="navbar__links">Care Team</a>
+			</li>
+			<li class="navbar__item">
+				<a href="cafe.html" class="navbar__links">Cafe</a>
+			</li>
+			<li class="navbar__btn">
+				<a href="Letschat.html" class="button">Let's Chat</a>
+			</li>
+			
+		</ul>
+	</div>
+</nav>
+
+<!--Main Section-->
+<div class="main">
+	<div class="main__container">
+		<div class="main__content">
+			<h1>ONYX Healthcare</h1>
+			<h2>Harnessing technology for better health.</h2>
+			<div class="main__img-container">
+				<img src="images/pic1.svg" alt="pic" id="main__img"
+				style="float: left; width: 75%;"/>
+			</div>
+		</div>
+	</div>
+</div>
+	<!--chat Bar Block-->
+	<div class="chat-bar-collapsible">
+		<button id="chat-button" type="button" class="collapsible">
+			How can I help?
+			<i id="chat-icon" style="color: #fff;" class="fa fa-fw fa-comments-o"></i>
+		</button>
+		<div class="content">
+			<div class="full-chat-block">
+				<!--message container-->
+				<div class="outer-container">
+					<div class="chat-container">
+						<!--messages-->
+						<div id="chatbox">
+							<h5 id="chat-timestamp"></h5>
+							<p id="botStarterMessage" class="botText"><span>Loading...</span></p>
+						</div>
+			
+							
+					<!--User Input box-->
+							<div class="chat-bar-input-block">
+								<div id="userInput">
+									<input id="textInput"class="input-box"  type="text"  
+									name="msg" placeholder="Tap 'Enter' to send a message">
+									<p></p>
+							</div>
+
+								<div class="chat-bar-icons">
+						<i id="chat-icon" style="color: #333;" class="fa fa-fw fa-send"
+					         onclick="sendButton()"></i>
+						</div>
+							</div>
+
+						<div id="chat-bar-bottom">
+							<p></p>
+						</div>
+
+					</div>
+				</div>
+
+		</div>
+	</div>
+	</div>
+	
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="static/scripts/responses.js"></script>
+<script src="static/scripts/chat.js"></script>
+<script src="app.js"></script>
+<script src="https://kit.fontawesome.com/f7e766ac8f.js" crossorigin="anonymous"></script>
+
+</html>

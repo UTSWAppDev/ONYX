@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hashtag Finder and Text Analyzer</title>
+	<script>
+		function analyzeAndFindHashtags() {
+			var input = document.getElementById("input").value;
+			var hashtags = findHashtags(input);
+			document.getElementById("hashtags").innerHTML = "Hashtags found: <br>" + hashtags.join("<br>");
+			analyzeText(input);
+		}
+
+		function findHashtags(input) {
+			const hashtags = input.match(/#.*?\n/g) || [];
+			console.log(hashtags); 
+			return hashtags;
+		}
+	
+		function analyzeText(txtInput) {
+			fetch("https://api.us-south.natural-language-understanding.watson.cloud.ibm.com/instances/0faaddc7-ba71-495b-b52a-d1338d5e887d/v1/analyze?version=2019-07-12", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					"Authorization": "Basic " + btoa("apikey:ew_gwxAcTQ0gbFTPi4uKM19OUgyP6Wu3XOxfsS9ESM_P")
+				},
+				body: JSON.stringify({
+					text: txtInput,
+					features: {
+						concepts: {},
+						entities: {},
+						keywords: {}
+					}
+				})
+			})
+				.then((response) => response.json())
+				.then((data) => {
+					console.log(data);
+					var NLU_output = document.getElementById("NLUoutput");
+					NLU_output.innerHTML = JSON.stringify(data);
+					
+				const concepts = [];
+				const entities = []; 
+				const keywords = []; 
+				
+				for (let i = 0; i < data.concepts.length; i++) { 
+					concepts.push(data.concepts[i].text);
+				}
+				
+				for (let j = 0; j < data.entities.length; j++) {
+					if (data.entities[j].type == 'HealthCondition') {
+						entities.push(data.entities[j].text);
+					}
+				}
+
+				for (let k = 0; k < data.keywords.length; k++) {
+					keywords.push(data.keywords[k].text);
+				}
+
+				console.log(concepts);
+				console.log(entities);
+				console.log(keywords);
+
+				})
+				.catch(error => {
+					console.error(error);
+				});
+		}
+
+		function searchGoogle(entities) {
+			// Empty array to store search results
+			let searchResults = [];  
+			
+			// Loop through each text content and perform the search
+			for (let l = 0; l < entities.length; l++) {
+				const searchQuery = "patient education material " + entities[l].text;
+				const searchUrl = "https://www.google.com/search?q=" + encodeURIComponent (searchQuery); 
+				searchResults.push(searchUrl); 
+			}
+
+			//Display search results in console
+			console.log(searchResults);
+		}
+
+	</script>
+</head>
+
+<body>
+	<h1>Hashtag Finder and Text Analyzer</h1>
+	<form>
+		<label for="input">Enter text to analyze:</label><br>
+		<textarea id="input" name="input" rows="40" cols="200"></textarea><br>
+		<button type="button" onclick="analyzeAndFindHashtags()">Find Hashtags and Analyze Text</button>
+		<button type="button" onclick="searchGoogle()">Find Patient Education Material</button>
+	</form>
+	<div>
+		<p><strong>Hashtags and Analyzed Text:</strong></p>
+		<p id="hashtags"></p>
+		<p id="NLUoutput"></p>
+		<br><strong>NLU Identified Concepts:</strong></br>
+		<p id="concepts"></p>
+		<p id="entities"></p>
+		<p id="keywords"></p>
+	</div>
+</body>
+</html>
