@@ -14,9 +14,9 @@
 			document.getElementById("hashtags").innerHTML = "Hashtags found: <br>" + hashtags.join("<br>");
 			analyzeText(input);
 	
-            searchGoogle(concepts);
-			searchGoogle(entities); 
-			searchGoogle(keywords);
+				// I moved the calls to searchGoogle to within the promise response (lin3 63). That means that they will only get called once the promise results
+				// When they were here, JavaScript was running then asynchronously (not waiting for the promise to result before moving on)
+            
 		}
 
 		function findHashtags(input) {
@@ -43,7 +43,6 @@
 			})
 				.then((response) => response.json())
 				.then((data) => {
-					console.log(data);
 					var NLU_output = document.getElementById("NLUoutput");
 					NLU_output.innerHTML = JSON.stringify(data);
 					
@@ -61,9 +60,9 @@
 					keywords.push(data.keywords[k].text);
 				}
 
-				console.log(concepts);
-				console.log(entities);
-				console.log(keywords);
+				searchGoogle(concepts);
+				searchGoogle(entities); 
+				searchGoogle(keywords);
 
 				})
 				.catch(error => {
@@ -72,8 +71,8 @@
 		}
 
 		function searchGoogle(query) {
-			console.log(query[0]);
-			console.log(query.length);
+			console.log("query[0]: " + query[0]);
+			console.log("query.length: " + query.length);
 			// Loop through each text content and perform the search
 			for (let m = 0; m < query.length; m++) {
 				console.log(m);
