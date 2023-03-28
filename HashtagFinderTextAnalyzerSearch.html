@@ -14,14 +14,13 @@
 			document.getElementById("hashtags").innerHTML = "Hashtags found: <br>" + hashtags.join("<br>");
 			analyzeText(input);
 	
-				// I moved the calls to searchGoogle to within the promise response (lin3 63). That means that they will only get called once the promise results
+				// I moved the calls to searchGoogle to within the promise response (line 63). That means that they will only get called once the promise results
 				// When they were here, JavaScript was running then asynchronously (not waiting for the promise to result before moving on)
             
 		}
 
 		function findHashtags(input) {
 			const hashtags = input.match(/#.*?\n/g) || [];
-//			console.log(hashtags); 
 			return hashtags;
 		}
 	
@@ -71,11 +70,8 @@
 		}
 
 		function searchGoogle(query) {
-			console.log("query[0]: " + query[0]);
-			console.log("query.length: " + query.length);
 			// Loop through each text content and perform the search
 			for (let m = 0; m < query.length; m++) {
-				console.log(m);
 				const searchQuery = "patient education material " + query[m];
 				const searchUrl = "https://www.google.com/search?q=" + encodeURIComponent (searchQuery); 
 				searchResults.push(searchUrl); 
