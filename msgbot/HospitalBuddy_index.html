@@ -18,9 +18,7 @@
   />
 </head>
 
-
 <body>
-
 	<!--Navigator bar-->
 <nav class="navbar">
 	<div class="navbar__container">
@@ -40,75 +38,42 @@
 			<li class="navbar__item">
 				<a href="cafe.html" class="navbar__links">Cafe</a>
 			</li>
-			<li class="navbar__btn">
-				<a href="Letschat.html" class="button">Let's Chat</a>
+			<li class="navbar__item">
+				<a href="Letschat.html" class="navbar__links">Let's Chat</a>
 			</li>
 			
 		</ul>
 	</div>
 </nav>
 
-<!--Main Section-->
+<!--Main Section For Images go to Undraw.com , for video used clipchamp-->
 <div class="main">
 	<div class="main__container">
 		<div class="main__content">
 			<h1>ONYX Healthcare</h1>
-			<h2>Harnessing technology for better health.</h2>
+			<h2>The Future of Medicine Today</h2>
 			<div class="main__img-container">
-				<img src="images/pic1.svg" alt="pic" id="main__img"
+				<img src="images/pic5.svg" alt="pic" id="main__img"
 				style="float: left; width: 75%;"/>
+		</div>
+		<div class="video_container">
+		  <iframe width="560" height="315" src="images/homePage.mp4" title="YouTube video player" 
+		  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+		  allowfullscreen>
+		</iframe>		
+		
+					  
+				</div>
+			</div>
+		
 			</div>
 		</div>
 	</div>
 </div>
-	<!--chat Bar Block-->
-	<div class="chat-bar-collapsible">
-		<button id="chat-button" type="button" class="collapsible">
-			How can I help?
-			<i id="chat-icon" style="color: #fff;" class="fa fa-fw fa-comments-o"></i>
-		</button>
-		<div class="content">
-			<div class="full-chat-block">
-				<!--message container-->
-				<div class="outer-container">
-					<div class="chat-container">
-						<!--messages-->
-						<div id="chatbox">
-							<h5 id="chat-timestamp"></h5>
-							<p id="botStarterMessage" class="botText"><span>Loading...</span></p>
-						</div>
-			
-							
-					<!--User Input box-->
-							<div class="chat-bar-input-block">
-								<div id="userInput">
-									<input id="textInput"class="input-box"  type="text"  
-									name="msg" placeholder="Tap 'Enter' to send a message">
-									<p></p>
-							</div>
-
-								<div class="chat-bar-icons">
-						<i id="chat-icon" style="color: #333;" class="fa fa-fw fa-send"
-					         onclick="sendButton()"></i>
-						</div>
-							</div>
-
-						<div id="chat-bar-bottom">
-							<p></p>
-						</div>
-
-					</div>
-				</div>
-
-		</div>
-	</div>
-	</div>
 	
 
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="static/scripts/responses.js"></script>
-<script src="static/scripts/chat.js"></script>
 <script src="app.js"></script>
 <script src="https://kit.fontawesome.com/f7e766ac8f.js" crossorigin="anonymous"></script>
 
