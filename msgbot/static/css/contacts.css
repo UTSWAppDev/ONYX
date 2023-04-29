@@ -1,12 +1,13 @@
-*{
+
+  *{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Kumbh Sans', sans-serif;
+    font-family: 'pragmatica,Arial,sans-serif';
 }
 
 .navbar {
-    background: #1508c4;
+    background: #121c6b;
     height: 80px;
     display: flex;
     justify-content: center;
@@ -30,8 +31,8 @@
 
  #navbar__logo
  {
-    background-color: #11031f;
-    background-image: linear-gradient(to top, #e76464 0%,#f5e4e4 100%);
+    background-color: #3209ea;
+    background-image: linear-gradient(to top, #f6f8fb 0%,#0d4170 100%);
     background-size: 100%;
     -webkit-background-clip: text;
     -moz-background-clip: text;
@@ -45,7 +46,7 @@
 }
 
 .fa-gem{
-    margin-right: 1rem;
+    margin-right: 0.5rem;
 }
 
 .navbar__menu{
@@ -89,7 +90,7 @@
     border: none;
     outline: none;
     border-radius: 4px;
-    background: #e76464;
+    background: #060763;
     color: #fff;
 }
 
@@ -196,66 +197,27 @@ html {
 
 body {
     margin: 0 auto;
-    background-color:#86b5d6;
+    background-color:#fff;
 }
 
 .main__container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    align-items: right;
+    align-items: center;
     justify-self: center;
     margin: 0 auto;
-    height: 75vh;
-    background-color: #60afa2;
+    height: 100vh;
+    background-color: #7faede;
     z-index: 1;
     width: 100%;
     max-width: 1300px;
     padding-right: 50px;
     padding-left: 50px;
   }
-  .main__container h1 {
-    align-items: first baseline;
-  }
-  .main_content h1 {
-    font-size: 4rem;
-    align-content: center;
-    align-items: center;
-    word-spacing: 1rem;
-    color: #1508c4;
-    background-color: #1508c4;
-    background-image: linear-gradient(to top, #ff0844 0%, #718dbe 100%);
-    background-size: 100%;
-    -webkit-background-clip: text;
-    -moz-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -moz-text-fill-color:transparent;
-  }
-  main_content h2 {
-    font-size: 3rem;
-    background-color: #1508c4;
-    background-image: linear-gradient(to top, #ff0844 0%, #718dbe 100%);
-    background-size: 100%;
-    -webkit-background-clip: text;
-    -moz-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -moz-text-fill-color:transparent;
-  }
   .main__content {
-    font-display:block ;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    justify-self: center;
-    margin: 0 auto;
-    height: 90vh;
-    color: #1508c4;;
-    z-index: 1;
-    width: 100%;
-    max-width: 1300px;
-    padding-right: 50px;
-    padding-left: 50px
+    display:inline-block;
+    margin-top: 0;
+    color: #1508c4;
   }
-
-
-
   
  
